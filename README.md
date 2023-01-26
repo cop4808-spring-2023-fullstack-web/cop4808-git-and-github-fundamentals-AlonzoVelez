@@ -1,4 +1,4 @@
-# Alonzo Velez HW1
+# Alonzo Velez
 # :wave: The Basics of GitHub 
 
 ## 🤓 Course overview and learning outcomes 
