@@ -44,10 +44,15 @@ function clickButton() {
       } else if (buttons[i].classList.contains("sign")) {
         inputSign(displayValue);
         updateDisplay();
-      } else if (buttons[i].classList.contains("sqrt")) {
-        inputSqrt(displayValue);
+      } else if (buttons[i].classList.contains("sin")) {
+        inputSin(displayValue);
         updateDisplay();
-      } else if (buttons[i].classList.contains("clear")) clearDisplay();
+      }
+      else if(buttons[i].classList.contains("cos")){
+        inputCos(displayValue);
+        updateDisplay();
+      }
+      else if (buttons[i].classList.contains("clear")) clearDisplay();
       updateDisplay();
     });
   }
@@ -82,6 +87,8 @@ function inputOperand(operand) {
 
 function inputOperator(operator) {
   console.log("Inside inputOperator");
+  console.log("firstOperator is: ", firstOperator);
+  console.log("secondOperator is: ", secondOperator);
   if (firstOperator != null && secondOperator === null) {
     //4th click - handles input of second operator
     secondOperator = operator;
@@ -177,9 +184,11 @@ function inputSign(num) {
   displayValue = (num * -1).toString();
 }
 
-function inputSqrt(num){
-    console.log("Inside inputSqrt");
-    displayValue = (num ** 0.5).toString();
+function inputSin(num) {
+  console.log("Inside inputCos");
+  const angleInRadians = num * (Math.PI / 180);
+  const sinOfAngle = Math.sin(angleInRadians);
+  displayValue = sinOfAngle.toString();
 }
 
 function clearDisplay() {
