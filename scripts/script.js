@@ -12,17 +12,37 @@ window.addEventListener("keydown", function (e) {
   key.click();
 });
 
+
+//Update Display Function
+//1. Changes the display to the current displayValue
+//2. Checks to see if the string is longer than 9 characters
+//3. Modifies string if longer than 9 characters
 function updateDisplay() {
   console.log("Inside updateDisplay displayValue is: ", displayValue);
   const display = document.getElementById("display");
   display.innerText = displayValue;
   if (displayValue.length > 9) {
-    display.innerText = displayValue.substring(0, 9);
+    //If the string is longer than 9 characters and it includes an exponential expression the 
+    //string is shortened to 6 characters and the exponential is shown to the user
+    if (displayValue.indexOf("e") != -1) {
+      console.log("Inside of updateDisplay if statement");
+      let index = displayValue.indexOf("e");
+      let lastCharacters = displayValue.substring(index);
+      display.innerText = displayValue.substring(0, 6) + lastCharacters;
+    } 
+    //Else if the string is longer than nine characters it is simply kept at 9 characters
+    else {
+      console.log("Outside of updateDisplay if statment: ");
+      display.innerText = displayValue.substring(0, 9);
+    }
   }
+  console.log("Display Value is: ", displayValue);
 }
 
 updateDisplay();
 
+//clickButton Function
+//1. Adds EventListeners to every button based of class and calls associated function and updateDisplay function
 function clickButton() {
   console.log("Inside clickButton");
   for (let i = 0; i < buttons.length; i++) {
@@ -61,6 +81,8 @@ function clickButton() {
 
 clickButton();
 
+//inputOperand Function
+//Handles Operands or digits
 function inputOperand(operand) {
   console.log("Operand in inputOperand function is:", operand);
   console.log("Display value inside inputOperand is: ", displayValue);
@@ -86,6 +108,8 @@ function inputOperand(operand) {
   }
 }
 
+//inputOperator
+//Handles Operators like +, -, /, *
 function inputOperator(operator) {
   console.log("Inside inputOperator");
   console.log("firstOperator is: ", firstOperator);
@@ -121,6 +145,9 @@ function inputOperator(operator) {
   }
 }
 
+
+//inputEquals
+//When user presses equals key perform all operator functions with the operands given by the user solving the equation
 function inputEquals() {
   console.log("Inside inputEquals");
   //hitting equals doesn't display undefined before operate()
@@ -165,6 +192,8 @@ function inputEquals() {
   }
 }
 
+//inputDecimal
+//Inputs a decimal to the display unless one is already present.
 function inputDecimal(dot) {
   console.log("Inside inputDecimal");
   if (displayValue === firstOperand || displayValue === secondOperand) {
@@ -175,16 +204,22 @@ function inputDecimal(dot) {
   }
 }
 
+//inputPercent
+//Divides the current value by 100 to gather the percentage value in decimal of the display
 function inputPercent(num) {
   console.log("Inside inputPercent");
   displayValue = (num / 100).toString();
 }
 
+//inputSign
+//Changes the sign of the current displayed value from positive to negative or vice versa
 function inputSign(num) {
   console.log("Inside inputSign");
   displayValue = (num * -1).toString();
 }
 
+//inputSin
+//Changes the current displayed value to a sine representation in radians
 function inputSin(num) {
   console.log("Inside inputSin");
   const angleInRadians = num * (Math.PI / 180);
@@ -192,6 +227,8 @@ function inputSin(num) {
   displayValue = sinOfAngle.toString();
 }
 
+//inputCos
+//Changes the current displayed value to a cosine representation in radians
 function inputCos(num) {
   console.log("Inside inputCos");
   const angleInRadians = num * (Math.PI / 180);
@@ -199,6 +236,8 @@ function inputCos(num) {
   displayValue = sinOfAngle.toString();
 }
 
+//inputTan
+//Changes the current displayed value to a tangent representation in radians.
 function inputTan(num) {
   console.log("Inside inputCos");
   if (num === "90" || num === "180" || num === "270" || num === "360") {
@@ -212,6 +251,8 @@ function inputTan(num) {
   }
 }
 
+//clearDisplay
+//Clears all values, operators, and operands from the display
 function clearDisplay() {
   console.log("Inside clearDisplay");
   displayValue = "0";
@@ -222,6 +263,8 @@ function clearDisplay() {
   result = null;
 }
 
+//inputBackspace
+//Nonfunctional
 function inputBackspace() {
   console.log("Inside inputBackspace");
   if (firstOperand != null) {
@@ -230,6 +273,8 @@ function inputBackspace() {
   }
 }
 
+//operate
+//Performs appropriate operator function on given operands based off given operator
 function operate(x, y, op) {
   console.log("Inside operate");
   if (op === "+") {
@@ -249,6 +294,8 @@ function operate(x, y, op) {
   }
 }
 
+//roundAccurately
+//Rounds the calculations
 function roundAccurately(num, places) {
   console.log("Inside roundAccurately");
   return parseFloat(Math.round(num + "e" + places) + "e-" + places);

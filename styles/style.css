@@ -139,5 +139,14 @@ button {
     background-color: rgb(123, 189, 255);
 }
 
+.top-row{
+    background-color: gray;
+    font-weight: bold;
+}
+
+.top-row:active{
+    background-color: white;
+}
+
 
 
