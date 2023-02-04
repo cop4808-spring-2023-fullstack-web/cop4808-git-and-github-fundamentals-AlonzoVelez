@@ -5,6 +5,7 @@ let firstOperator = null;
 let secondOperator = null;
 let result = null;
 const buttons = document.querySelectorAll('button');
+console.log("Amount of buttons is:", buttons.length);
 
 window.addEventListener('keydown', function(e){
     const key = document.querySelector(`button[data-key='${e.keyCode}']`);
@@ -12,6 +13,7 @@ window.addEventListener('keydown', function(e){
 });
 
 function updateDisplay() {
+    console.log("Inside updateDisplay displayValue is: ", displayValue);
     const display = document.getElementById('display');
     display.innerText = displayValue;
     if(displayValue.length > 9) {
@@ -22,6 +24,7 @@ function updateDisplay() {
 updateDisplay();
 
 function clickButton() {
+    console.log("Inside clickButton");
     for(let i = 0; i < buttons.length; i++) {
         buttons[i].addEventListener('click', function() {
             if(buttons[i].classList.contains('operand')) {
@@ -51,12 +54,16 @@ function clickButton() {
 clickButton();
 
 function inputOperand(operand) {
+    console.log("Operand in inputOperand function is:", operand);
+    console.log("Display value inside inputOperand is: ", displayValue);
+    console.log("First operand is: ", firstOperand);
     if(firstOperator === null) {
         if(displayValue === '0' || displayValue === 0) {
             //1st click - handles first operand input
             displayValue = operand;
         } else if(displayValue === firstOperand) {
             //starts new operation after inputEquals()
+            console.log("Inside displayValue === firstOperand");
             displayValue = operand;
         } else {
             displayValue += operand;
@@ -72,6 +79,7 @@ function inputOperand(operand) {
 }
 
 function inputOperator(operator) {
+    console.log("Inside inputOperator");
     if(firstOperator != null && secondOperator === null) {
         //4th click - handles input of second operator
         secondOperator = operator;
@@ -96,6 +104,7 @@ function inputOperator(operator) {
 }
 
 function inputEquals() {
+    console.log("Inside inputEquals");
     //hitting equals doesn't display undefined before operate()
     if(firstOperator === null) {
         displayValue = displayValue;
@@ -131,6 +140,7 @@ function inputEquals() {
 }
 
 function inputDecimal(dot) {
+    console.log("Inside inputDecimal");
     if(displayValue === firstOperand || displayValue === secondOperand) {
         displayValue = '0';
         displayValue += dot;
@@ -140,14 +150,17 @@ function inputDecimal(dot) {
 }
 
 function inputPercent(num) {
+    console.log("Inside inputPercent");
     displayValue = (num/100).toString();
 }
 
 function inputSign(num) {
+    console.log("Inside inputSign");
     displayValue = (num * -1).toString();
 }
 
 function clearDisplay() {
+    console.log("Inside clearDisplay");
     displayValue = '0';
     firstOperand = null;
     secondOperand = null;
@@ -157,6 +170,7 @@ function clearDisplay() {
 }
 
 function inputBackspace() {
+    console.log("Inside inputBackspace");
     if(firstOperand != null) {
         firstOperand = null;
         updateDisplay();
@@ -164,6 +178,7 @@ function inputBackspace() {
 }
 
 function operate(x, y, op) {
+    console.log("Inside operate");
     if(op === '+') {
         return x + y;
     } else if(op === '-') {
@@ -180,5 +195,6 @@ function operate(x, y, op) {
 }
 
 function roundAccurately(num, places) {
+    console.log("Inside roundAccurately");
     return parseFloat(Math.round(num + 'e' + places) + 'e-' + places);
 }
