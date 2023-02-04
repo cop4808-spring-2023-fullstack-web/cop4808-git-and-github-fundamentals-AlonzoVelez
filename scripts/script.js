@@ -47,12 +47,13 @@ function clickButton() {
       } else if (buttons[i].classList.contains("sin")) {
         inputSin(displayValue);
         updateDisplay();
-      }
-      else if(buttons[i].classList.contains("cos")){
+      } else if (buttons[i].classList.contains("cos")) {
         inputCos(displayValue);
         updateDisplay();
-      }
-      else if (buttons[i].classList.contains("clear")) clearDisplay();
+      } else if (buttons[i].classList.contains("tan")) {
+        inputTan(displayValue);
+        updateDisplay();
+      } else if (buttons[i].classList.contains("clear")) clearDisplay();
       updateDisplay();
     });
   }
@@ -185,10 +186,30 @@ function inputSign(num) {
 }
 
 function inputSin(num) {
-  console.log("Inside inputCos");
+  console.log("Inside inputSin");
   const angleInRadians = num * (Math.PI / 180);
   const sinOfAngle = Math.sin(angleInRadians);
   displayValue = sinOfAngle.toString();
+}
+
+function inputCos(num) {
+  console.log("Inside inputCos");
+  const angleInRadians = num * (Math.PI / 180);
+  const sinOfAngle = Math.cos(angleInRadians).toFixed(7);
+  displayValue = sinOfAngle.toString();
+}
+
+function inputTan(num) {
+  console.log("Inside inputCos");
+  if (num === "90" || num === "180" || num === "270" || num === "360") {
+    displayValue = "Undefined";
+  } else if (num === "45" || num === "135" || num === "225" || num === "315") {
+    displayValue = "1";
+  } else {
+    const angleInRadians = num * (Math.PI / 180);
+    const sinOfAngle = Math.tan(angleInRadians);
+    displayValue = sinOfAngle.toString();
+  }
 }
 
 function clearDisplay() {
