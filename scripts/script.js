@@ -12,7 +12,6 @@ window.addEventListener("keydown", function (e) {
   key.click();
 });
 
-
 //Update Display Function
 //1. Changes the display to the current displayValue
 //2. Checks to see if the string is longer than 9 characters
@@ -22,14 +21,14 @@ function updateDisplay() {
   const display = document.getElementById("display");
   display.innerText = displayValue;
   if (displayValue.length > 9) {
-    //If the string is longer than 9 characters and it includes an exponential expression the 
+    //If the string is longer than 9 characters and it includes an exponential expression the
     //string is shortened to 6 characters and the exponential is shown to the user
     if (displayValue.indexOf("e") != -1) {
       console.log("Inside of updateDisplay if statement");
       let index = displayValue.indexOf("e");
       let lastCharacters = displayValue.substring(index);
       display.innerText = displayValue.substring(0, 6) + lastCharacters;
-    } 
+    }
     //Else if the string is longer than nine characters it is simply kept at 9 characters
     else {
       console.log("Outside of updateDisplay if statment: ");
@@ -145,7 +144,6 @@ function inputOperator(operator) {
   }
 }
 
-
 //inputEquals
 //When user presses equals key perform all operator functions with the operands given by the user solving the equation
 function inputEquals() {
@@ -221,28 +219,38 @@ function inputSign(num) {
 //inputSin
 //Changes the current displayed value to a sine representation in radians
 function inputSin(num) {
-  console.log("Inside inputSin");
-  const angleInRadians = num * (Math.PI / 180);
-  const sinOfAngle = Math.sin(angleInRadians);
-  displayValue = sinOfAngle.toString();
+  //Sin(0) & Sin(180) are 0 in sine
+  if (num === "0" || num === "180") {
+    displayValue = "0";
+  } else {
+    const angleInRadians = num * (Math.PI / 180);
+    const sinOfAngle = Math.sin(angleInRadians);
+    displayValue = sinOfAngle.toString();
+  }
 }
 
 //inputCos
 //Changes the current displayed value to a cosine representation in radians
 function inputCos(num) {
-  console.log("Inside inputCos");
-  const angleInRadians = num * (Math.PI / 180);
-  const sinOfAngle = Math.cos(angleInRadians).toFixed(7);
-  displayValue = sinOfAngle.toString();
+  //Cos(90) & Cos(270) are 0
+  if (num === "90" || num === "270") {
+    displayValue = "0";
+  } else {
+    const angleInRadians = num * (Math.PI / 180);
+    const sinOfAngle = Math.cos(angleInRadians);
+    displayValue = sinOfAngle.toString();
+  }
 }
 
 //inputTan
 //Changes the current displayed value to a tangent representation in radians.
 function inputTan(num) {
-  console.log("Inside inputCos");
-  if (num === "90" || num === "180" || num === "270" || num === "360") {
+  //All values divisible by 90 are undefined in tangent
+  if (num % 90 === 0) {
     displayValue = "Undefined";
-  } else if (num === "45" || num === "135" || num === "225" || num === "315") {
+  }
+  //All values listed should be 1 in tangent
+  else if (num === "45" || num === "135" || num === "225" || num === "315") {
     displayValue = "1";
   } else {
     const angleInRadians = num * (Math.PI / 180);
@@ -282,6 +290,7 @@ function operate(x, y, op) {
   } else if (op === "-") {
     return x - y;
   } else if (op === "*") {
+    console.log("INSIDE operate x and y are: ", x, y);
     return x * y;
   } else if (op === "/") {
     if (y === 0) {
@@ -289,7 +298,9 @@ function operate(x, y, op) {
     } else {
       return x / y;
     }
-  } else if (op === "^") {
+  }
+  //Added functionality for the exponential key
+  else if (op === "^") {
     return x ** y;
   }
 }
