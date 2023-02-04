@@ -44,6 +44,9 @@ function clickButton() {
       } else if (buttons[i].classList.contains("sign")) {
         inputSign(displayValue);
         updateDisplay();
+      } else if (buttons[i].classList.contains("sqrt")) {
+        inputSqrt(displayValue);
+        updateDisplay();
       } else if (buttons[i].classList.contains("clear")) clearDisplay();
       updateDisplay();
     });
@@ -172,6 +175,11 @@ function inputPercent(num) {
 function inputSign(num) {
   console.log("Inside inputSign");
   displayValue = (num * -1).toString();
+}
+
+function inputSqrt(num){
+    console.log("Inside inputSqrt");
+    displayValue = (num ** 0.5).toString();
 }
 
 function clearDisplay() {

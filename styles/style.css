@@ -101,6 +101,13 @@ button {
     background-color: rgb(123, 189, 255);
 }
 
+.sqrt{
+    background-color: dodgerblue;
+}
+.sqrt:active{
+    background-color: rgb(123, 189, 255);
+}
+
 .percent {
     background-color: dodgerblue;
 }
@@ -109,7 +116,5 @@ button {
     background-color: rgb(123, 189, 255);
 }
 
-.sqrt, .ln{
-    grid-column: span 2;
-}
+
 
