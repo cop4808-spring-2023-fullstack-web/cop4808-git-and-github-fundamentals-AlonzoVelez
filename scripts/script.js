@@ -220,7 +220,7 @@ function inputSign(num) {
 //Changes the current displayed value to a sine representation in radians
 function inputSin(num) {
   //Sin(0) & Sin(180) are 0 in sine
-  if (num === "0" || num === "180") {
+  if (num === "0" || num === "180" || num === "360") {
     displayValue = "0";
   } else {
     const angleInRadians = num * (Math.PI / 180);
